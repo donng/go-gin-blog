@@ -43,3 +43,15 @@ func CreateArticle(c *gin.Context) {
 
 	app.Success(c, id)
 }
+
+func ShowArticle(c *gin.Context) {
+
+}
+
+func RemoveArticle(c *gin.Context) {
+
+}
+
+func ModifyArticle(c *gin.Context) {
+
+}

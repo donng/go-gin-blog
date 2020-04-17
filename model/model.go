@@ -5,15 +5,20 @@ import (
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"go-gin-blog/conf"
+	"time"
 )
 
 var db *gorm.DB
 
+type Model struct {
+	ID uint `gorm:"primary_key" json:"id"`
+	CreatedAt time.Time `json:"created_at"`
+	UpdatedAt time.Time `json:"updated_at"`
+}
+
 // 初始化数据库服务
 func init() {
 	databaseConf := conf.Setting.Database
-
-	fmt.Println(databaseConf)
 
 	var err error
 	db, err = gorm.Open(databaseConf.Type, getDatabaseSource(databaseConf))
@@ -40,4 +45,8 @@ func getDatabaseSource(conf conf.Database) string {
 	default:
 		panic(fmt.Sprintf("error database type: %s", conf.Type))
 	}
+}
+
+func CloseDB() {
+	defer db.Close()
 }

@@ -1,15 +1,12 @@
 package model
 
-import (
-	"github.com/jinzhu/gorm"
-)
-
 type Article struct {
-	gorm.Model
+	Model
 	Title   string `json:"title"`
+	Desc    string `json:"desc"`
 	Content string `json:"content"`
-	Status  int    `json:"status" gorm:"default:1"`
-	Tag     int    `json:"tag"`
+	Status  int    `json:"status"`
+	TagID   int    `json:"tag_id"`
 }
 
 // 声明表名称，默认为 struct 的复数表示
