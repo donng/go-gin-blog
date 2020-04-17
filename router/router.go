@@ -29,6 +29,7 @@ func addRoutes(r *gin.Engine) {
 			})
 		})
 		router.GET("/articles", api.GetArticles)
+		router.POST("/article", api.CreateArticle)
 	}
 
 }

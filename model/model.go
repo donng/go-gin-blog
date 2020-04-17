@@ -15,11 +15,12 @@ func init() {
 
 	fmt.Println(databaseConf)
 
-	db, err := gorm.Open(databaseConf.Type, getDatabaseSource(databaseConf))
+	var err error
+	db, err = gorm.Open(databaseConf.Type, getDatabaseSource(databaseConf))
 	if err != nil {
 		panic(err)
 	}
-	defer db.Close()
+	//defer db.Close()
 
 	gorm.DefaultTableNameHandler = func(db *gorm.DB, defaultTableName string) string {
 		return databaseConf.TablePrefix + defaultTableName
