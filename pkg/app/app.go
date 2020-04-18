@@ -20,10 +20,10 @@ func Response(c *gin.Context, code int, data interface{}, message string) {
 	})
 }
 
-func Success(c *gin.Context, data interface{}) {
+func ShowData(c *gin.Context, data interface{}) {
 	Response(c, e.SUCCESS, data, e.GetErrMsg(e.SUCCESS))
 }
 
-func Fail(c *gin.Context, code int) {
+func ShowError(c *gin.Context, code int) {
 	Response(c, code, "", e.GetErrMsg(code))
 }
