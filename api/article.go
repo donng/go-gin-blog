@@ -55,7 +55,9 @@ func CreateArticle(c *gin.Context) {
 		app.ShowError(c, e.ArticleCreateError)
 	}
 
-	app.ShowData(c, id)
+	app.ShowData(c, gin.H{
+		"id": id,
+	})
 }
 
 func ShowArticle(c *gin.Context) {
@@ -64,7 +66,8 @@ func ShowArticle(c *gin.Context) {
 	var params = struct {
 		ID int `json:"id" binding:"required"`
 	}{}
-	if err := c.ShouldBindQuery(&params); err != nil {
+
+	if err := c.ShouldBindJSON(&params); err != nil {
 		log.Printf("params error: %s", err.Error())
 		app.ShowError(c, e.ParamsError)
 		return
@@ -84,7 +87,7 @@ func RemoveArticle(c *gin.Context) {
 		ID int `json:"id" binding:"required"`
 	}{}
 
-	if err := c.ShouldBindQuery(&params); err != nil {
+	if err := c.ShouldBindJSON(&params); err != nil {
 		log.Printf("params error: %s", err.Error())
 		app.ShowError(c, e.ParamsError)
 		return
